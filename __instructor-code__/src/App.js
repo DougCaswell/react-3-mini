@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import logo from './mainStreetAuto.svg';
+import logo from './mainStreetAuto.svg';
 import axios from 'axios';
 import './App.css';
 
@@ -37,36 +37,19 @@ class App extends Component {
     // axios (GET)
     // setState with response -> vehiclesToDisplay
     let promise = axios.get(this.state.baseUrl + '/api/vehicles')
-    promise.then( (res) => {
-      // console.log(res)
-      this.setState({
-        vehiclesToDisplay: res.data
-      })
+    promise.then((res) => {
+      this.setState({ vehiclesToDisplay: res.data })
     })
   }
 
   getPotentialBuyers() {
-    // axios (GET)
+    // axios (GET) url: /api/buyers
     // setState with response -> buyersToDisplay
-    let promise = axios.get(this.state.baseUrl + '/api/buyers')
-    promise.then( (res) => {
-      // console.log(res)
-      this.setState({
-        buyersToDisplay: res.data
-      })
-    })
   }
 
   sellCar(id) {
-    // axios (DELETE)
+    // axios (DELETE) url: /api/vehicles/{id}
     // setState with response -> vehiclesToDisplay
-    let promise = axios.delete(`${this.state.baseUrl}/api/vehicles/${id}`)
-    promise.then( (res) => {
-      console.log(res)
-      this.setState({
-        vehiclesToDisplay: res.data.vehicles
-      })
-    })
   }
 
   filterByMake() {
@@ -74,14 +57,6 @@ class App extends Component {
 
     // axios (GET)
     // setState with response -> vehiclesToDisplay
-    let promise = axios.get(`${this.state.baseUrl}/api/vehicles`)
-    promise.then( (res) => {
-        console.log(res)
-        let filteredCars = res.data.filter((car) => car.make === make)
-        this.setState({
-          vehiclesToDisplay: filteredCars
-      })
-    })
   }
 
   filterByColor() {
@@ -89,27 +64,16 @@ class App extends Component {
 
     // axios (GET)
     // setState with response -> vehiclesToDisplay
-    let promise = axios.get(`${this.state.baseUrl}/api/vehicles`)
-    promise.then( (res) => {
-        console.log(res)
-        let filteredCars = res.data.filter((car) => car.color === color)
-        this.setState({
-          vehiclesToDisplay: filteredCars
-      })
-    })
   }
 
   updatePrice(priceChange, id) {
     // axios (PUT)
     // setState with response -> vehiclesToDisplay
     let promise = axios.put(`${this.state.baseUrl}/api/vehicles/${id}/${priceChange}`)
-    promise.then( (res) => {
-      // console.log(res)
-      return(
-        this.setState({
-          vehiclesToDisplay: res.data.vehicles
-      }))
-    } )
+    promise.then((res) => {
+      console.log(res)
+      this.setState({ vehiclesToDisplay: res.data.vehicles })
+    })
   }
 
   addCar() {
@@ -124,10 +88,9 @@ class App extends Component {
     // axios (POST)
     // setState with response -> vehiclesToDisplay
     let promise = axios.post(`${this.state.baseUrl}/api/vehicles`, newCar)
-    promise.then( (res) => {
-      this.setState({
-        vehiclesToDisplay: res.data.vehicles
-      })
+    promise.then((res) => {
+      console.log(res)
+      this.setState({ vehiclesToDisplay: res.data.vehicles })
     })
   }
 
@@ -140,25 +103,11 @@ class App extends Component {
 
     //axios (POST)
     // setState with response -> buyersToDisplay
-    let promise = axios.post(`${this.state.baseUrl}/api/buyers`, newBuyer)
-    promise.then( (res) => {
-      this.setState({
-        buyersToDisplay: res.data.buyers
-      })
-    })
   }
 
   deleteBuyer(id) {
     // axios (DELETE)
     //setState with response -> buyersToDisplay
-    let promise = axios.delete(`${this.state.baseUrl}/api/buyers/${id}`)
-    promise.then( (res) => {
-      this.setState({
-        buyersToDisplay: res.data.buyers
-      })
-    })
-
-
   }
 
   nameSearch() {
@@ -166,14 +115,6 @@ class App extends Component {
 
     // axios (GET)
     // setState with response -> buyersToDisplay
-    let promise = axios.get(`${this.state.baseUrl}/api/buyers`)
-    promise.then( (res) => {
-        console.log(res)
-        let filteredNames = res.data.filter((person) => person.name.includes(searchLetters))
-        this.setState({
-          buyersToDisplay: filteredNames
-      })
-    })
   }
 
   byYear() {
@@ -181,14 +122,6 @@ class App extends Component {
 
     // axios (GET)
     // setState with response -> vehiclesToDisplay
-    let promise = axios.get(`${this.state.baseUrl}/api/vehicles`)
-    promise.then( (res) => {
-        console.log(res)
-        let filteredCars = res.data.filter((car) => car.year == year)
-        this.setState({
-          vehiclesToDisplay: filteredCars
-      })
-    })
   }
 
   // Do not edit the code below
@@ -264,7 +197,7 @@ class App extends Component {
         <ToastContainer />
 
         <header className="header">
-          {/* <img src={logo} alt="" /> */}
+          <img src={logo} alt="" />
 
           <button
             className="header-btn1 btn"
